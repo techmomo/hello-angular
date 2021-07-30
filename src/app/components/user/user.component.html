@@ -1,0 +1,50 @@
+<!-- {{users | json }} -->
+
+<div *ngIf="users.length > 0; else noUsers">
+    <table class="table table-dark table-hover table-striped table-bordered caption-top">
+        <caption>List of Users</caption>
+        <thead>
+            <tr>
+                <th>
+                    #
+                </th>
+                <th>
+                    NAME
+                </th>
+                <th>
+                    AGE
+                </th>
+                <th>
+                    SALARY
+                </th>
+                <th>ACTIONs</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let u of users">
+                <td>
+                    {{u.id}}</td>
+                <td>{{u.name}}</td>
+                <td>{{u.dob | age}}</td>
+                <td>{{u.salary | currency : "GBP"}}</td>
+                <td>
+                    <a routerLink="/user/info/{{u.id}}" class="link-success">View Details</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!--- else block in case of no users-->
+<ng-template #noUsers>
+    <h3>No Users Found</h3>
+</ng-template>
+<div>
+    <!-- property binding -->
+    <input type="text" name="phone" [value]="phoneNumber" (input)="getPhone($event)" class="form-control"/>
+</div>
+
+<div>
+    <!-- event binding -->
+    <button (click)="sendUsers()" class="btn btn-secondary">Send Users</button>
+</div>
